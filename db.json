@@ -1,0 +1,12 @@
+{
+  "tests":[
+    {"_id":"598e9256cc88456d444e7c0d","name":"AngularJS Test","__v":0,
+     "questions":[{"questionText":" AngularJS supports which kind of data binding. ","type":"Multiple-Response","correctOptionIndex":[0,1],"_id":"598e9256cc88456d444e7c12","options":["one","two","three","four"]},
+                  {"questionText":" AngularJS is based on the which pattern. ","correctOptionIndex":1,"_id":"598e9256cc88456d444e7c11","options":[" VMC","MVC","MCV","CVM"]},
+                  {"questionText":"There is a controller which takes single parameter. We call it  parameter","correctOptionIndex":2,"_id":"598e9256cc88456d444e7c10","options":["param","control","scope","scont"]}
+                 ]
+    }
+  ]       
+
+}
+

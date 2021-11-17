@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Interview</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>My Interview Portal</h1>
+            <hr>
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{data.tests[id].name}}</div>
+                    <div class="panel-body">
+                        <form [formGroup]="fullForm" *ngIf="!data.tests[id].questions[index].type">
+
+                            <label>{{data.tests[id].questions[index].questionText}}</label>
+
+                            <div class="radio" *ngFor="let op of data.tests[id].questions[index].options;let i=index">
+                                <label>
+                                    <input (click)="counter(i)" [checked]="options[index]==i" type="radio" name="option"
+                                        value="option1">
+                                    {{op}}
+                                </label>
+                            </div>
+
+                            <!-- <div class="radio" *ngIf="data.tests[id].questions[index].options[4]">
+                                <label>
+                                    <input (click)="counter(4)" [checked]="options[index]==4"  type="radio" name="option" value="option5">
+                                    {{data.tests[id].questions[index].options[4]}}
+                                </label>
+                            </div> -->
+                            
+                        </form>
+                        <!-- checkboxForm -->
+                        <form *ngIf="data.tests[id].questions[index].type">
+                            <label>{{data.tests[id].questions[index].questionText}}</label>
+
+                            <div class="checkbox"
+                                *ngFor="let op of data.tests[id].questions[index].options;let i=index">
+                                <label>
+                                    <input (click)="checkbox(i)" [checked]="options[index].includes(i)" type="checkbox"
+                                        name="option" value="option2">
+                                    {{op}}
+                                </label>
+                            </div>
+                            <!-- 
+                            <div class="checkbox" *ngIf="data.tests[id].questions[index].options[4]">
+                                <label>
+                                    <input (click)="checkbox(4)" [checked]="options[index].includes(4)" type="checkbox" name="option" value="option2">
+                                    {{data.tests[id].questions[index].options[4]}}
+                                </label>
+                            </div> 
+                            -->
+                        </form>
+
+                    </div>
+                    <!-- <div id="disp" style="color:green; font-size:18px; font-weight:bold;">
+                    </div> -->
+                    <div class="panel-footer">
+                        <a *ngIf="index>0" (click)="Previous()" class="btn btn-success">Previous</a>
+                        <!-- <button type="button" (click)="lesson()">
+                           Get
+                        </button>  -->
+                        <a *ngIf="(index+1) !=arrLength" (click)="next()" class="pull-right btn btn-success">Next</a>
+                        <!-- <a *ngIf="data.tests[id].questions[index].type ||index >0 " (click)="startNext1()" class="pull-right btn btn-success">Next</a> -->
+                        <a (click)="finishTest()" class="pull-right btn btn-danger">Finish</a>
+                        <!-- *ngIf="index+1==arrLength" -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</body>
+
+</html>
+
+<!-- [checked]="options[index].includes(0)"  -->
+<!-- if (localStorage.getItem('arr2') != null) {
+    this.id2 = localStorage.getItem('arr2');
+    this.options[this.index] = this.id2
+  }
+  if (localStorage.getItem('arr1') != null) {
+    this.id1 = localStorage.getItem('arr1')
+    this.options = localStorage.getItem('userInput');
+    this.options=JSON.parse(this.options)
+    // this.options[this.index] = this.id1
+  } -->
