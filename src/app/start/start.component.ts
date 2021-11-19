@@ -28,7 +28,7 @@ export class StartComponent implements OnInit {
   options: any = []
   isChecked: boolean = false
   lessons: any;
-  
+  x: any = false
   // checkedForm: boolean = true
   constructor(private fb: FormBuilder, private router: Router, private testService: TestService) { }
 
@@ -42,29 +42,27 @@ export class StartComponent implements OnInit {
   }
 
   Previous() {
+    // if(this.index==this.arrLength){
+    //   this.options=this.id1;
+    // }
     this.previous = true
     this.index--;
     console.log(this.data.tests[this.id].questions[this.index])
     console.log("userinput" + (this.userInput));
-    localStorage.setItem("userInput", JSON.stringify(this.userInput))
-    // this.userInput=localStorage.getItem('userInput');
+    // localStorage.setItem("userInput", JSON.stringify(this.userInput))
+    
     this.id2 = localStorage.getItem('arr2');
-    this.id2 =JSON.parse(this.id2)
+    this.id2 = JSON.parse(this.id2)
     console.log(this.index);
     console.log("preid :" + this.userInput[this.index]);
-    // this.userInput[this.index].checked=true
-
   }
   next() {
-
     localStorage.setItem("arr2", JSON.stringify(this.id2))
     this.currentArr = localStorage.getItem('arr2')
     this.id2 = JSON.parse(this.currentArr)
     // console.log(this.data.tests[this.id].questions[this.index].correctOptionIndex)
     this.id1 = localStorage.getItem('arr1');
     this.id1 = JSON.parse(this.id1)
-
-
     console.log("type" + typeof (this.id1), typeof (this.id2))
     if (this.radioOption) {
       this.options[this.index] = this.id1
@@ -102,7 +100,7 @@ export class StartComponent implements OnInit {
     this.arrLength = this.data.tests[this.id].questions.length
     console.log("index :" + (this.data.tests[this.id].questions[this.index].correctOptionIndex))
     console.log("id2Arr:" + (this.id2));
-    // this.id2.sort();
+    this.id2.sort();
     if (JSON.stringify(this.id2) == JSON.stringify(this.data.tests[this.id].questions[this.index].correctOptionIndex)) {
       this.correctCount++;
       console.log("answer matched");
@@ -111,7 +109,10 @@ export class StartComponent implements OnInit {
       this.testService.setResult(this.correctCount, this.arrLength);
     }
     this.index++;
-    // this.previous = false
+    this.previous = false
+    
+    this.id2=[]
+    
   }
 
 
@@ -154,13 +155,13 @@ export class StartComponent implements OnInit {
     }
     this.router.navigate(['finish']);
     this.index++;
-
   }
-
   counter(id1: any) {
     this.radioOption = true
     localStorage.setItem("arr1", JSON.stringify(id1))
     this.id1 = localStorage.getItem('arr1');
+    this.options[this.index] = id1
+    localStorage.setItem("userInput", JSON.stringify(this.options))
   }
   // localStorage.setItem("arr",JSON.stringify(id))
   // this.id=localStorage.getItem('arr');
@@ -168,53 +169,63 @@ export class StartComponent implements OnInit {
   checkbox(a: number) {
     this.checkboxOption = true
     console.log("checkbox" + a);
-    // console.log("id2Arr:" + (this.id2));
-
     this.id2.push(a);
-    // this.id2 = a
-    // localStorage.setItem("arr2", JSON.stringify(this.id2))
-    // this.id2 = JSON.parse(this.id2);
-    // this.id2 = localStorage.getItem('arr2');
     console.log("id2" + this.id2);
 
   }
+  abc(value: number) {
+    let dd: any = [];
+    if (typeof (this.options[this.index]) == (typeof dd)) {
+      return this.options[this.index].includes(value);
+    }
+  }
   ngOnInit(): void {
-    // this.index=0
-    // this.checkedForm=true
-    // localStorage.setItem("userInput", JSON.stringify(this.options))
-    // this.options = JSON.parse(this.options);
-    this.options[this.index] = this.id1
-    this.id = localStorage.getItem('arr');
-    // this.id2 = localStorage.getItem('arr2');
-    // if(localStorage.getItem('userInput')==null){
-    //  this.options=localStorage.getItem('userInput')
-    //   }
+
+    // this.options[this.index] = this.id1
+
+    if (localStorage.getItem('userInput') == null) {
+      this.options = [];
+    }
+    else {
+      this.id1 = localStorage.getItem('arr1')
+      this.id1 = JSON.parse(this.id1)
+      this.id2 = localStorage.getItem('arr2');
+      this.id2 = JSON.parse(this.id2)
+      this.options = localStorage.getItem('userInput');
+      this.options = JSON.parse(this.options);
+
+    }
+
     if (localStorage.getItem('arr2') != null) {
       this.id2 = localStorage.getItem('arr2');
-      this.id2 =JSON.parse(this.id2)
-      this.options[this.index] = this.id2
-    //  this.options=localStorage.getItem('userInput')
+      this.id2 = JSON.parse(this.id2)
+      // this.options[this.index] = this.id2
+      
     }
     if (localStorage.getItem('arr1') != null) {
       this.id1 = localStorage.getItem('arr1')
+      this.id=JSON.parse(this.id1)
       this.options = localStorage.getItem('userInput');
       this.options = JSON.parse(this.options)
-      this.options[this.index] = this.id1
-    }
-   
-    this.testService.setResult(this.correctCount, this.arrLength);
+      // this.options[this.index] = this.id1
     
+    }
+
+    this.testService.setResult(this.correctCount, this.arrLength);
+
     this.testService.getData().subscribe((data) => {
       this.data = data;
       console.log(data);
-    console.log(this.data.tests[0].questions[0])
-    
+      console.log(this.data.tests[0].questions[0])
+
     });
-  
+    this.id = localStorage.getItem('arr');
+    this.id = JSON.parse(this.id)
     this.arrLength = this.data.tests[this.id].questions.length;
     console.log("lenght" + this.data.tests[this.id].questions.length)
 
     console.log("arrLength" + this.arrLength)
   }
+
 }
 

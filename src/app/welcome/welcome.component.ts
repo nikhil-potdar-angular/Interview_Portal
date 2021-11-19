@@ -21,6 +21,7 @@ export class WelcomeComponent implements OnInit {
       this.data = data;
       console.log(data);
     });
+    
   }
 
 }

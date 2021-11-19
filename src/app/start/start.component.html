@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div  class="container">
         <div class="row">
             <h1>My Interview Portal</h1>
             <hr>
@@ -26,7 +26,7 @@
                                 <label>
                                     <input (click)="counter(i)" [checked]="options[index]==i" type="radio" name="option"
                                         value="option1">
-                                    {{op}}
+                                       {{op}}
                                 </label>
                             </div>
 
@@ -45,8 +45,8 @@
                             <div class="checkbox"
                                 *ngFor="let op of data.tests[id].questions[index].options;let i=index">
                                 <label>
-                                    <input (click)="checkbox(i)" [checked]="options[index].includes(i)" type="checkbox"
-                                        name="option" value="option2">
+                                    <input (click)="checkbox(i)" [checked]="abc(i)" type="checkbox"
+                                        name="option" value="option">
                                     {{op}}
                                 </label>
                             </div>
@@ -82,14 +82,3 @@
 
 </html>
 
-<!-- [checked]="options[index].includes(0)"  -->
-<!-- if (localStorage.getItem('arr2') != null) {
-    this.id2 = localStorage.getItem('arr2');
-    this.options[this.index] = this.id2
-  }
-  if (localStorage.getItem('arr1') != null) {
-    this.id1 = localStorage.getItem('arr1')
-    this.options = localStorage.getItem('userInput');
-    this.options=JSON.parse(this.options)
-    // this.options[this.index] = this.id1
-  } -->
